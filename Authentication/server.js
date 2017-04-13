@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
-
+app.set('secret',config.secret);
 
 app.get('/',function(req,res) {
   res.send('This is the api for the authentication using the json web token  LOCALHOST AND PORT' + port + '/api' );
@@ -41,17 +41,6 @@ app.get('/setup',function(req,res) {
 
 });
 
-// apiRoutes.get('/',function(req,res) {
-//   res.json({message:'This is my house bitches'});
-// });
-//
-// apiRoutes.get('/users',function(req,res) {
-//   User.find({},function(err,users) {
-//     res.json(users);
-//   });
-// });
-//
-// app.use('/api',apiRoutes);
 routes.configure(apiRoutes,app);
 app.listen(port);
 

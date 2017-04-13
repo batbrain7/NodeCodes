@@ -1,4 +1,5 @@
 var model = require('./server');
+var jwt = require('jsonwebtoken');
 var User = require('./app/models/user');
 
 module.exports = {
@@ -21,14 +22,15 @@ module.exports = {
         },function(err,user) {
           if(err) throw err;
 
+          console.log(req.body.name);
           if(!user) {
             res.json({success : false,message : 'Authentication failed.User not found.'});
           } else if (user) {
             if(user.password!=req.body.password) {
               res.json({success:false,message : 'Authentication failed. Passwords do not match.'});
             } else {
-              var token = jwt.sign(user,app.get('superSecret'),{
-                expiresInMintues : 1440;
+              var token = jwt.sign(user,app.get('secret'),{
+                expiresIn : 60*60*24
               });
 
               res.json({
@@ -38,8 +40,7 @@ module.exports = {
               });
             }
           }
-        }
-        })
+        });
     });
 
     apiRoutes.use(function(req,res,next) {
@@ -47,7 +48,7 @@ module.exports = {
       var token = req.body.token||req.query.token||req.headers['x-access-token'];
 
       if(token) {
-          jwt.verify(token,app.get('superSecret'),functon(err,decoded) {
+          jwt.verify(token,app.get('secret'),function(err,decoded) {
             if(err) {
               return res.json({success:false,message:'Failed to authenticate the token.'});
             } else {
