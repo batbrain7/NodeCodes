@@ -41,17 +41,18 @@ app.get('/setup',function(req,res) {
 
 });
 
-apiRoutes.get('/',function(req,res) {
-  res.json({message:'This is my house bitches'});
-});
-
-apiRoutes.get('/users',function(req,res) {
-  User.find({},function(err,users) {
-    res.json(users);
-  });
-}):
-
-//routes.configure(apiRoutes,app);
+// apiRoutes.get('/',function(req,res) {
+//   res.json({message:'This is my house bitches'});
+// });
+//
+// apiRoutes.get('/users',function(req,res) {
+//   User.find({},function(err,users) {
+//     res.json(users);
+//   });
+// });
+//
+// app.use('/api',apiRoutes);
+routes.configure(apiRoutes,app);
 app.listen(port);
 
 console.log('Server has just started!!');
