@@ -1,0 +1,11 @@
+{
+  "name": "moit",
+  "version": "1.0.0",
+  "description": "SCraping the web using cheerio",
+  "main": "index.js",
+  "scripts": {
+    "test": "server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

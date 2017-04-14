@@ -17,9 +17,7 @@ module.exports = {
 
     apiRoutes.post('/authenticate',function(req,res) {
 
-        User.findOne({
-          name: req.body.name
-        },function(err,user) {
+        User.findOne({name: req.body.name},function(err,user) {
           if(err) throw err;
 
           console.log(req.body.name);
@@ -30,7 +28,7 @@ module.exports = {
               res.json({success:false,message : 'Authentication failed. Passwords do not match.'});
             } else {
               var token = jwt.sign(user,app.get('secret'),{
-                expiresIn : 60*60*24
+                  expiresIn : 60*60*24
               });
 
               res.json({
