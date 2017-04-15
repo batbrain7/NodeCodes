@@ -8,7 +8,10 @@ var fs = require('fs');
 app.get('/scrape',function(req,res) {
   // res.send('This is the demo page to scrape the web');
 
-  url = 'http://www.imdb.com/title/tt3417422/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2681270342&pf_rd_r=150YB6DTA9MWACRX7A1Z&pf_rd_s=center-4&pf_rd_t=64301&pf_rd_i=top-rated-indian-movies&ref_=in_india_ss_toprated_tt_2';
+  //url = 'http://www.imdb.com/title/tt3417422/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2681270342&pf_rd_r=150YB6DTA9MWACRX7A1Z&pf_rd_s=center-4&pf_rd_t=64301&pf_rd_i=top-rated-indian-movies&ref_=in_india_ss_toprated_tt_2';
+
+  url = 'https://www.google.co.in/' + req.body.field; 
+
   request(url,function(error,response,html) {
     if(!error) {
       var $ = cheerio.load(html);
